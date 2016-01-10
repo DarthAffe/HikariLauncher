@@ -1,0 +1,64 @@
+﻿<UserControl x:Class="HikariLauncher.Controls.LoadingScreenControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:controls="clr-namespace:HikariLauncher.Controls"
+             mc:Ignorable="d" 
+             d:DesignWidth="1280" d:DesignHeight="720" x:Name="CtrlLoadingScreen"
+             HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Transparent" PreviewKeyDown="LoadingScreenControl_OnPreviewKeyDown">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../Resources/HikariLauncherResourceDictionary.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <Style TargetType="{x:Type controls:LoadingScreenControl}">
+                <Style.Triggers>
+                    <DataTrigger Binding="{Binding Path=IsLoading, ElementName=CtrlLoadingScreen}" Value="True">
+                        <DataTrigger.EnterActions>
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <DoubleAnimation Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:0.5" />
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </DataTrigger.EnterActions>
+                        <DataTrigger.ExitActions>
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <DoubleAnimation Storyboard.TargetProperty="Opacity" From="1" To="0" Duration="0:0:1" />
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </DataTrigger.ExitActions>
+                    </DataTrigger>
+                    <Trigger Property="Opacity" Value="0.0">
+                        <Setter Property="Visibility" Value="Collapsed" />
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <Border Background="{StaticResource OverlayDarkBrush}" BorderThickness="0">
+        <Viewbox Margin="64" Stretch="Uniform">
+            <Grid>
+                <Image Source="../Resources/logo_wo_glow.png" />
+                <Image Source="../Resources/logo.png">
+                    <Image.OpacityMask>
+                        <MultiBinding Converter="{StaticResource ProgressToOpacityMaskConverter}">
+                            <Binding ElementName="CtrlLoadingScreen" Path="Value" />
+                            <Binding ElementName="CtrlLoadingScreen" Path="MaxValue" />
+                        </MultiBinding>
+                    </Image.OpacityMask>
+                </Image>
+
+                <StackPanel Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,72,64" >
+                    <controls:BlurTextControl Margin="8" FontSize="132" FontFamily="{StaticResource Hikari}" FontWeight="Black" HorizontalAlignment="Center"
+                                              Text="{Binding ElementName=CtrlLoadingScreen, Path=Text}" />
+                    <controls:BlurTextControl Margin="8" FontSize="132" FontFamily="{StaticResource Hikari}" FontWeight="Black" HorizontalAlignment="Center"
+                                              Text="{Binding ElementName=CtrlLoadingScreen, Path=Value, StringFormat={}{0:F0}%}" />
+                </StackPanel>
+            </Grid>
+        </Viewbox>
+    </Border>
+</UserControl>

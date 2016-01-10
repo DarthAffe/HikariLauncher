@@ -1,0 +1,15 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:converter="clr-namespace:HikariLauncher.Converter">
+
+    <converter:ScrollOffsetToVisibilityConverter x:Key="ScrollOffsetToVisibilityConverter" />
+    <converter:ScrollOffsetToOpacityMaskConverter x:Key="ScrollOffsetToOpacityMaskConverter" />
+    <converter:ProgressToOpacityMaskConverter x:Key="ProgressToOpacityMaskConverter" />
+    <converter:BoolToCollapsedVisibilityConverter x:Key="BoolToCollapsedVisibilityConverter" />
+    <converter:ImageCacheConverter x:Key="ImageCacheConverter" />
+    <converter:NullToCollapsedVisibilityConverter x:Key="NullToCollapsedVisibilityConverter" />
+    <converter:GameTypeToButtonTextConverter x:Key="GameTypeToButtonTextConverter" />
+    <converter:InvertBoolConverter x:Key="InvertBoolConverter" />
+    <converter:NullToBoolConverter x:Key="NullToBoolConverter" />
+
+</ResourceDictionary>

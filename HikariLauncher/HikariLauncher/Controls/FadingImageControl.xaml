@@ -1,0 +1,13 @@
+﻿<UserControl x:Class="HikariLauncher.Controls.FadingImageControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             SnapsToDevicePixels="True" >
+    <Grid>
+        <Viewbox x:Name="img1" Opacity="0" Grid.ZIndex="2" Stretch="UniformToFill" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <Image />
+        </Viewbox>
+        <Viewbox x:Name="img2" Opacity="1" Grid.ZIndex="1" Stretch="UniformToFill" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <Image />
+        </Viewbox>
+    </Grid>
+</UserControl>

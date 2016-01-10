@@ -1,0 +1,31 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- Basic -->
+    <SolidColorBrush x:Key="OverlayBrightBrush" Color="#10AAAAAA" />
+    <SolidColorBrush x:Key="OverlayDarkBrush" Color="#88000000" />
+
+    <!-- GameSelection -->
+    <Color x:Key="GameIconBackgroundColor" A="0" R="0" G="0" B="0" />
+    <Color x:Key="GameIconBorderColor" A="0" R="0" G="0" B="0" />
+    <Color x:Key="GameIconHoverBackgroundColor" A="24" R="170" G="170" B="170" />
+    <Color x:Key="GameIconHoverBorderColor" A="102" R="170" G="170" B="170" />
+    <Color x:Key="GameIconSelectedBackgroundColor" A="66" R="193" G="149" B="2" />
+    <Color x:Key="GameIconSelectedBorderColor" A="170" R="193" G="149" B="2" />
+
+    <Color x:Key="GameSelectionScrollButtonBackgroundColor" A="34" R="170" G="170" B="170" />
+    <Color x:Key="GameSelectionScrollButtonBorderColor" A="102" R="170" G="170" B="170" />
+    <Color x:Key="GameSelectionScrollButtonHoverBackgroundColor" A="60" R="170" G="170" B="170" />
+    <Color x:Key="GameSelectionScrollButtonHoverBorderColor" A="120" R="170" G="170" B="170" />
+
+    <Color x:Key="GoldButtonBackgroundColor" A="120" R="193" G="149" B="2" />
+    <Color x:Key="GoldButtonBorderColor" A="180" R="193" G="149" B="2" />
+    <Color x:Key="GoldButtonHoverBackgroundColor" A="180" R="193" G="149" B="2" />
+    <Color x:Key="GoldButtonHoverBorderColor" A="250" R="193" G="149" B="2" />
+    <Color x:Key="GoldButtonDisabledBackgroundColor" A="160" R="170" G="170" B="170" />
+    <Color x:Key="GoldButtonDisabledBorderColor" A="220" R="170" G="170" B="170" />
+
+    <SolidColorBrush x:Key="TitleForegroundBrush" Color="#FFC19502" />
+    <SolidColorBrush x:Key="GameIconForegroundBrush" Color="White" />
+
+</ResourceDictionary>

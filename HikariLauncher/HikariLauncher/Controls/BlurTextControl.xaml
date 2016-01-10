@@ -1,0 +1,14 @@
+﻿<UserControl x:Class="HikariLauncher.Controls.BlurTextControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Name="CtrlBlurText">
+    <Grid>
+        <TextBlock Foreground="{Binding ElementName=CtrlBlurText, Path=BlurBrush}" FontWeight="Black" Text="{Binding ElementName=CtrlBlurText, Path=Text}">
+            <TextBlock.Effect>
+                <BlurEffect Radius="40" />
+            </TextBlock.Effect>
+        </TextBlock>
+
+        <TextBlock Foreground="{Binding ElementName=CtrlBlurText, Path=TextBrush}" Text="{Binding ElementName=CtrlBlurText, Path=Text}" />
+    </Grid>
+</UserControl>

@@ -1,0 +1,98 @@
+﻿<UserControl x:Class="HikariLauncher.Controls.GameControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:controls="clr-namespace:HikariLauncher.Controls"
+             mc:Ignorable="d" 
+             d:DesignWidth="1160" d:DesignHeight="640">
+
+    <UserControl.Resources>
+        <ResourceDictionary Source="../Resources/HikariLauncherResourceDictionary.xaml" />
+    </UserControl.Resources>
+
+    <Grid>
+        <ScrollViewer x:Name="ScrollViewer" CanContentScroll="False" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Hidden">
+            <ScrollViewer.OpacityMask>
+                <MultiBinding Converter="{StaticResource ScrollOffsetToOpacityMaskConverter}" ConverterParameter="30">
+                    <Binding ElementName="ScrollViewer" Path="VerticalOffset" />
+                    <Binding ElementName="ScrollViewer" Path="ScrollableHeight" />
+                    <Binding ElementName="ScrollViewer" Path="ActualHeight" />
+                </MultiBinding>
+            </ScrollViewer.OpacityMask>
+
+            <DockPanel Margin="48,0,48,48" LastChildFill="False">
+                <Button DockPanel.Dock="Top" Margin="8" HorizontalAlignment="Center" Command="{Binding Path=OpenProjectSiteCommand}">
+                    <Button.Template>
+                        <ControlTemplate>
+                            <controls:BlurTextControl FontSize="120" TextBrush="{StaticResource TitleForegroundBrush}"
+                                              FontFamily="{StaticResource Hikari}" Text="{Binding Path=SelectedGame.Name}" />
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+
+                <GroupBox Header="Installationsverzeichnis" DockPanel.Dock="Top">
+                    <DockPanel LastChildFill="True" Height="26" Margin="2">
+                        <controls:ImageButton DockPanel.Dock="Right" Margin="4,0,0,0" VerticalAlignment="Center" Image="../Resources/browse.png" ToolTip="Durchsuchen"
+                                      Command="{Binding Path=BrowseInstallDirCommand}" />
+                        <TextBox x:Name="TxtInstallDir" VerticalAlignment="Center" Text="{Binding Path=InstallDir, ValidatesOnExceptions=True, ValidatesOnDataErrors=True}" 
+                         ToolTip="{Binding RelativeSource={RelativeSource self}, Path=(Validation.Errors).CurrentItem.ErrorContent}" />
+                    </DockPanel>
+                </GroupBox>
+
+                <DockPanel DockPanel.Dock="Bottom" LastChildFill="False">
+                    <Grid DockPanel.Dock="Left" Width="230" Height="70">
+                        <Button Style="{StaticResource GoldFlatButtonStyle}" Command="{Binding Path=InstallPatchCommand}"
+                        Visibility="{Binding Path=IsGamePatched, Converter={StaticResource BoolToCollapsedVisibilityConverter}, ConverterParameter=True}"
+                        IsEnabled="{Binding ElementName=TxtInstallDir, Path=(Validation.Errors).CurrentItem.ErrorContent, Converter={StaticResource NullToBoolConverter}, ConverterParameter=True}">
+                            <Button.Content>
+                                <controls:BlurTextControl FontFamily="{StaticResource Hikari}" FontSize="48" Text="{Binding Path=SelectedGame.GameType, Converter={StaticResource GameTypeToButtonTextConverter}}" />
+                            </Button.Content>
+                        </Button>
+                        <Button Style="{StaticResource GoldFlatButtonStyle}"
+                        Command="{Binding Path=StartGameCommand}"
+                        Visibility="{Binding Path=IsGamePatched, Converter={StaticResource BoolToCollapsedVisibilityConverter}}"
+                        IsEnabled="{Binding Path=SelectedGame.StartCommand, Converter={StaticResource NullToBoolConverter}}">
+                            <Button.Content>
+                                <controls:BlurTextControl FontFamily="{StaticResource Hikari}" FontSize="48" Text="Starten" />
+                            </Button.Content>
+                        </Button>
+                    </Grid>
+                </DockPanel>
+                
+                <GroupBox DockPanel.Dock="Top" Margin="0,16" Header="Info">
+                    <TextBlock Text="{Binding Path=SelectedGame.Info}" Foreground="White" TextWrapping="Wrap" />
+                </GroupBox>
+                
+            </DockPanel>
+
+        </ScrollViewer>
+
+        <DockPanel LastChildFill="False">
+            <RepeatButton DockPanel.Dock="Top" Style="{StaticResource GameSelectionScrollViewButtonStyle}"
+                              Command="{x:Static ScrollBar.LineUpCommand}" CommandTarget="{Binding ElementName=ScrollViewer}">
+                <RepeatButton.Visibility>
+                    <MultiBinding Converter="{StaticResource ScrollOffsetToVisibilityConverter}" ConverterParameter="Top">
+                        <Binding ElementName="ScrollViewer" Path="VerticalOffset"/>
+                        <Binding ElementName="ScrollViewer" Path="ScrollableHeight"/>
+                    </MultiBinding>
+                </RepeatButton.Visibility>
+                <RepeatButton.Content>
+                    <Image Source="../Resources/arrow_up.png" Stretch="Uniform" />
+                </RepeatButton.Content>
+            </RepeatButton>
+            <RepeatButton DockPanel.Dock="Bottom" Style="{StaticResource GameSelectionScrollViewButtonStyle}"
+                              Command="{x:Static ScrollBar.LineDownCommand}" CommandTarget="{Binding ElementName=ScrollViewer}">
+                <RepeatButton.Visibility>
+                    <MultiBinding Converter="{StaticResource ScrollOffsetToVisibilityConverter}" ConverterParameter="Bottom">
+                        <Binding ElementName="ScrollViewer" Path="VerticalOffset"/>
+                        <Binding ElementName="ScrollViewer" Path="ScrollableHeight"/>
+                    </MultiBinding>
+                </RepeatButton.Visibility>
+                <RepeatButton.Content>
+                    <Image Source="../Resources/arrow_down.png" Stretch="Uniform" />
+                </RepeatButton.Content>
+            </RepeatButton>
+        </DockPanel>
+    </Grid>
+</UserControl>
